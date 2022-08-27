@@ -12,7 +12,6 @@ import "react-toastify/dist/ReactToastify.css";
 const ModalList = () => {
   const dispatch = useDispatch();
   const { order } = useSelector((state) => state.products);
-
   const remove = () => {
     toast.error("The item is deleted to cart ", {
       position: toast.POSITION.TOP_RIGHT,

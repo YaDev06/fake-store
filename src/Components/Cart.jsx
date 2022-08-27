@@ -6,7 +6,8 @@ import { changeModal } from "../redux/actions/actions";
 const Cart = () => {
   const dispatch = useDispatch();
   const { comments } = useSelector((state) => state.aProduct);
-  const { order,  } = useSelector((state) => state.products);
+  const { order } = useSelector((state) => state.products);
+  console.log(order);
   return (
     <div className="Cart">
       <button

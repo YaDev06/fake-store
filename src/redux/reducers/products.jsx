@@ -13,30 +13,6 @@ const initialState = {
   order: [],
 };
 
-// const products = createReducer(
-//   initialState,
-//   {
-//     [getData]: (state, { payload }) => {
-//       state.products = payload;
-//     },
-
-//     [changeModal]: (state) => {
-//       state.modal = !state.modal;
-//     },
-
-//     [getOrderedItem]: (state, { payload }) => {
-//       state.order = state.order.push(payload);
-//     },
-//     [filterFromCart]: (state,{payload})=>{
-//       state.order = state.order.filter(s=>s.id !== payload.id)
-//     },
-//     [setOrder]: (state, { payload }) => {
-//       state.order = payload;
-//     },
-//   },
-//   () => {}
-// );
-
 const products = createReducer(initialState, (builder) => {
   builder
     .addCase(getData, (state, { payload }) => {
@@ -46,7 +22,7 @@ const products = createReducer(initialState, (builder) => {
       state.modal = !state.modal;
     })
     .addCase(getOrderedItem, (state, { payload }) => {
-      state.order = state.order.push(payload);
+      state.order = [...state.order, payload];
     })
     .addCase(filterFromCart, (state, { payload }) => {
       state.order = state.order.filter((s) => s.id !== payload.id);
