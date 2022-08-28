@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getACategory, getProductById } from "../fetching";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import Loader from "./UI/Loader/Loader";
 import Error from "./UI/Error/Error";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer,toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import {
-  get_a_category,
   get_name,
   get_comment,
   get_product_by_id,
-  getOrderedItem,
   addComment,
-} from "../redux/actions/actions";
+} from "../redux/reducers/aProduct";
+import { getOrderedItem } from "../redux/reducers/products";
+import { get_a_category } from "../redux/reducers/category";
 
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
@@ -33,35 +33,13 @@ import "swiper/css/autoplay";
 const ByProductsId = () => {
   const [showCategory, setShowCategory] = useState(false);
 
-  // toast start
-  const error = () => {
-    toast.error("Name and Comment are required!", {
-      position: toast.POSITION.TOP_CENTER,
-    });
-  };
-
-  const send = () => {
-    toast.success("Your Comment Has Been Sent !", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-  };
-
-  const addToCart = () => {
-    toast.success("The item is added to cart ", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-  };
-
-  // toast end
-
   // react-router-dom start
-  const navigate = useNavigate();
 
+  const { id } = useParams();
+  const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
-
-  const { id } = useParams();
 
   // react-router-dom end
 
@@ -107,10 +85,25 @@ const ByProductsId = () => {
 
   // db end
 
-  // other funcs start
+// toast
 
-  // other funcs end
+const addToCart = () => {
+  toast.success("The item is added to cart ", {
+    position: toast.POSITION.TOP_RIGHT,
+  });
+};
 
+const error = () => {
+  toast.error("Name and Comment are required!", {
+    position: toast.POSITION.TOP_CENTER,
+  });
+};
+
+const send = () => {
+  toast.success("Your Comment Has Been Sent !", {
+    position: toast.POSITION.TOP_RIGHT,
+  });
+};
   if (id > 20) {
     return <Error />;
   }

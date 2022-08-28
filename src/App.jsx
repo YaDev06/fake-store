@@ -10,7 +10,7 @@ import Product from "./Components/Product";
 import Cart from "./Components/Cart";
 import ModalList from "./Components/ModalList";
 import CommentList from "./Components/CommentList";
-import { getData } from './redux/actions/actions';
+import { getData } from "./redux/reducers/products";
 
 function App() {
   const dispatch = useDispatch();

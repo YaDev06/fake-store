@@ -1,29 +1,28 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { ToastContainer,toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   changeModal,
   filterFromCart,
   setOrder,
-} from "../redux/actions/actions";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+} from "../redux/reducers/products";
 
 const ModalList = () => {
   const dispatch = useDispatch();
   const { order } = useSelector((state) => state.products);
-  const remove = () => {
-    toast.error("The item is deleted to cart ", {
-      position: toast.POSITION.TOP_RIGHT,
-    });
-  };
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/order")
       .then((res) => dispatch(setOrder(res.data)));
   }, []);
-
+  const remove = () => {
+    toast.error("The item is deleted to cart ", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
   const deleteFromOrder = (id) => {
     axios.delete(`http://localhost:3000/order/${id}`).then(() => {
       dispatch(filterFromCart({ id }));

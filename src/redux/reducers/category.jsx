@@ -1,5 +1,5 @@
-import { createReducer } from "@reduxjs/toolkit";
-import { get_a_category } from "../actions/actions";
+import { createReducer, createSlice, createAction } from "@reduxjs/toolkit";
+export const get_a_category = createAction("GET_A_CATEGORY");
 
 const initialState = {
   ByCategory: [],

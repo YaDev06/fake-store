@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { setComments } from "../redux/reducers/aProduct";
 import axios from "axios";
-import { setComments } from "../redux/actions/actions";
+import { useNavigate } from 'react-router-dom';
+
 
 const CommentList = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/comments/")
@@ -18,7 +20,7 @@ const CommentList = () => {
   }, []);
 
   const { comments } = useSelector((state) => state.aProduct);
-console.log(comments);
+
   return (
     <div className="content container">
       <button

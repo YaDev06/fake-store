@@ -1,16 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import { getACategory } from "../fetching";
 import Loader from "./UI/Loader/Loader";
 import "react-toastify/dist/ReactToastify.css";
-import { get_a_category, getOrderedItem } from "../redux/actions/actions";
+import { get_a_category } from "../redux/reducers/category";
+import { getOrderedItem } from "../redux/reducers/products";
 import axios from "axios";
 
 const ByCategory = () => {
-  const navigate = useNavigate();
-
   const addToCart = () => {
     toast.success("The item is added to cart ", {
       position: toast.POSITION.TOP_RIGHT,
@@ -30,10 +29,11 @@ const ByCategory = () => {
       });
   };
 
+  const { category } = useParams();
+  const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
-  const { category } = useParams();
   const dispatch = useDispatch();
   const { ByCategory } = useSelector((state) => state.category);
 

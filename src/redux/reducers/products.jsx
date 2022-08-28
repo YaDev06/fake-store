@@ -1,11 +1,12 @@
-import { createReducer } from "@reduxjs/toolkit";
-import {
-  changeModal,
-  filterFromCart,
-  getData,
-  getOrderedItem,
-  setOrder,
-} from "../actions/actions";
+import { createSlice, createReducer, createAction } from "@reduxjs/toolkit";
+export const getData = createAction("GET_PRODUCTS");
+export const changeModal = createAction("CHANGE_MODAL");
+
+export const setOrder = createAction("SET_ORDER");
+
+export const getOrderedItem = createAction("GET_ORDERED_ITEM");
+
+export const filterFromCart = createAction("FILTER_FROM_CART");
 
 const initialState = {
   products: [],
@@ -32,68 +33,5 @@ const products = createReducer(initialState, (builder) => {
     })
     .addDefaultCase(() => {});
 });
-
-// const products = (state = initialState, { type, payload }) => {
-//   switch (type) {
-//     case "GET_PRODUCTS": {
-//       return {
-//         ...state,
-//         products: payload,
-//       };
-//     }
-
-//     case "CHANGE_MODAL": {
-//       return {
-//         ...state,
-//         modal: !state.modal,
-//       };
-//     }
-
-//     case "GET_ORDERED_ITEM": {
-//       const index = state.order.findIndex((e) => e.id === payload.id);
-
-//       let newMass = null;
-//       if (index < 0) {
-//         const newOrder = {
-//           ...payload,
-//           quantity: 1,
-//         };
-//         newMass = [...state.order, newOrder];
-//       } else {
-//         newMass = state.order.map((value, idx) => {
-//           if (idx === index) {
-//             return {
-//               ...value,
-//               quantity: value.quantity + 1,
-//             };
-//           } else {
-//             return value;
-//           }
-//         });
-//       }
-//       return {
-//         ...state,
-//         order: newMass,
-//       };
-//     }
-
-//     case "FILTER_FROM_CART": {
-//       return {
-//         ...state,
-//         order: state.order.filter((item) => item.id !== payload.id),
-//       };
-//     }
-
-//     case "SET_ORDER": {
-//       return {
-//         ...state,
-//         order: payload,
-//       };
-//     }
-
-//     default:
-//       return state;
-//   }
-// };
 
 export default products;
