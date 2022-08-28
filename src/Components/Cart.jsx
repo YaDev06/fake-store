@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { changeModal } from "../redux/reducers/products";
+import { changeModal } from "../redux/slices/modalSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { comments } = useSelector((state) => state.aProduct);
-  const { order } = useSelector((state) => state.products);
-  
+  const comments = useSelector((state) => state.commentSlice.comments);
+  const order = useSelector((state) => state.orderSlice.order);
+
   return (
     <div className="Cart">
       <button

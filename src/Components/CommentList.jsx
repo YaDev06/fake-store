@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setComments } from "../redux/reducers/aProduct";
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
+import { setComments } from "../redux/slices/commentSlice";
 
 const CommentList = () => {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const CommentList = () => {
       .then((res) => dispatch(setComments(res.data)));
   }, []);
 
-  const { comments } = useSelector((state) => state.aProduct);
+  const comments = useSelector((state) => state.commentSlice.comments);
 
   return (
     <div className="content container">

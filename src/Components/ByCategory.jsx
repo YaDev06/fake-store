@@ -5,9 +5,9 @@ import { ToastContainer, toast } from "react-toastify";
 import { getACategory } from "../fetching";
 import Loader from "./UI/Loader/Loader";
 import "react-toastify/dist/ReactToastify.css";
-import { get_a_category } from "../redux/reducers/category";
-import { getOrderedItem } from "../redux/reducers/products";
 import axios from "axios";
+import { getOrderedItem } from "../redux/slices/orderSlice";
+import { get_a_category } from "../redux/slices/categorySlice";
 
 const ByCategory = () => {
   const addToCart = () => {
@@ -35,7 +35,7 @@ const ByCategory = () => {
     navigate(-1);
   };
   const dispatch = useDispatch();
-  const { ByCategory } = useSelector((state) => state.category);
+  const ByCategory = useSelector((state) => state.categorySlice.ByCategory);
 
   useEffect(() => {
     getACategory(category).then((data) => {

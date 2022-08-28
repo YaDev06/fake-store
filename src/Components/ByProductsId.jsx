@@ -4,17 +4,17 @@ import { getACategory, getProductById } from "../fetching";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Loader from "./UI/Loader/Loader";
 import Error from "./UI/Error/Error";
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import { get_product_by_id } from "../redux/slices/idProductSlice";
+import { getOrderedItem } from "../redux/slices/orderSlice";
 import {
+  addComment,
   get_name,
   get_comment,
-  get_product_by_id,
-  addComment,
-} from "../redux/reducers/aProduct";
-import { getOrderedItem } from "../redux/reducers/products";
-import { get_a_category } from "../redux/reducers/category";
+} from "../redux/slices/commentSlice";
+import { get_a_category } from "../redux/slices/categorySlice";
 
 // import Swiper core and required modules
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
@@ -46,11 +46,12 @@ const ByProductsId = () => {
   // redux start
 
   const dispatch = useDispatch();
-  const { ByProductsId, name, comment } = useSelector(
-    (state) => state.aProduct
+  const ByProductsId = useSelector(
+    (state) => state.idProductSlice.ByProductsId
   );
-
-  const { ByCategory } = useSelector((state) => state.category);
+  const name = useSelector((state) => state.commentSlice.name);
+  const comment = useSelector((state) => state.commentSlice.comment);
+  const ByCategory = useSelector((state) => state.categorySlice.ByCategory);
 
   // redux end
 
@@ -85,25 +86,25 @@ const ByProductsId = () => {
 
   // db end
 
-// toast
+  // toast
 
-const addToCart = () => {
-  toast.success("The item is added to cart ", {
-    position: toast.POSITION.TOP_RIGHT,
-  });
-};
+  const addToCart = () => {
+    toast.success("The item is added to cart ", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
 
-const error = () => {
-  toast.error("Name and Comment are required!", {
-    position: toast.POSITION.TOP_CENTER,
-  });
-};
+  const error = () => {
+    toast.error("Name and Comment are required!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
 
-const send = () => {
-  toast.success("Your Comment Has Been Sent !", {
-    position: toast.POSITION.TOP_RIGHT,
-  });
-};
+  const send = () => {
+    toast.success("Your Comment Has Been Sent !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
   if (id > 20) {
     return <Error />;
   }

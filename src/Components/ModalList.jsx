@@ -1,17 +1,14 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { ToastContainer,toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  changeModal,
-  filterFromCart,
-  setOrder,
-} from "../redux/reducers/products";
+import { filterFromCart, setOrder } from "../redux/slices/orderSlice";
+import { changeModal } from "../redux/slices/modalSlice";
 
 const ModalList = () => {
   const dispatch = useDispatch();
-  const { order } = useSelector((state) => state.products);
+  const order = useSelector((state) => state.orderSlice.order);
 
   useEffect(() => {
     axios

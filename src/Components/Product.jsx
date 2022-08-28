@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import Loader from "./UI/Loader/Loader";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { getOrderedItem } from "../redux/reducers/products";
 import axios from "axios";
 import { star } from "../otherFunctions";
+import { getOrderedItem } from "../redux/slices/orderSlice";
 
 const Product = () => {
-  const { products } = useSelector((state) => state.products);
+  const products = useSelector((state) => state.productSlice.products);
   const dispatch = useDispatch();
 
   const addToCart = () => {
@@ -17,7 +17,7 @@ const Product = () => {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
-  
+
   const putOrder = (image, title, price) => {
     axios
       .post("http://localhost:3000/order", {
